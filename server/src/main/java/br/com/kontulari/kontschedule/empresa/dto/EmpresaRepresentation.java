@@ -9,13 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Getter
 public class EmpresaRepresentation {
   private final Long id;
   private final String razaoSocial;
   private final String nomeFantasia;
   private final String CNPJ;
+  @JsonIgnore
   private final List<AtividadeRepresentation> atividades = new ArrayList<>();
+  @JsonIgnore
   private final List<EnderecoRepresentation> enderecos = new ArrayList<>();
 
   public EmpresaRepresentation(Empresa empresa) {

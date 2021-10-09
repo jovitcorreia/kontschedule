@@ -24,7 +24,10 @@ public class AtividadeService {
 	}
 
 	public Atividade cadastra(@Valid AtividadeRepresentation registro) {
-		
-		return null;
+		Atividade atividade=AtividadeMapper.fromDTO(registro);
+		repository.save(atividade);
+		return atividade;
 	}
+	
+	
 }
