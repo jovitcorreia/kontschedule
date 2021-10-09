@@ -1,11 +1,13 @@
 package br.com.kontulari.kontschedule.util;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 import java.sql.Date;
 import java.time.Instant;
 import java.time.YearMonth;
 import java.time.ZoneId;
 
+@Converter
 public class CompetenciaConverter implements AttributeConverter<YearMonth, Date> {
   @Override
   public Date convertToDatabaseColumn(YearMonth yearMonth) {
