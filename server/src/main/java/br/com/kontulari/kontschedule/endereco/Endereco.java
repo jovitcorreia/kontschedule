@@ -1,10 +1,16 @@
 package br.com.kontulari.kontschedule.endereco;
 
+import javax.persistence.MappedSuperclass;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+
+@MappedSuperclass
 @Getter
 @Setter
+@AllArgsConstructor
 public class Endereco {
   private String rua;
   private String numero;

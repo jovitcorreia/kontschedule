@@ -44,5 +44,8 @@ public class EmpresaService {
   }
 
   @Transactional
-  public void deleta(Empresa empresa) {}
+  public void deleta(Long empresaId) {
+	  repository.deleteById(empresaId);
+  }
+
 }

@@ -48,4 +48,8 @@ public class Empresa {
   public int hashCode() {
     return Objects.hash(id, CNPJ);
   }
+
+public Empresa(Long idEmpresa) {
+	this.id=idEmpresa;
+}
 }
