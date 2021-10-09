@@ -1,7 +1,11 @@
 package br.com.kontulari.kontschedule.empresa;
 
+import br.com.kontulari.kontschedule.contador.Contador;
 import br.com.kontulari.kontschedule.empresa.dto.EmpresaRegistration;
 import br.com.kontulari.kontschedule.empresa.dto.EmpresaRepresentation;
+import br.com.kontulari.kontschedule.exception.ContadorNotFoundException;
+import br.com.kontulari.kontschedule.exception.EmpresaNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +48,13 @@ public class EmpresaService {
   }
 
   @Transactional
-  public void deleta(Long empresaId) {
+  public void deleta(Long empresaId) throws EmpresaNotFoundException {
+	  verifyIfExists(empresaId);
 	  repository.deleteById(empresaId);
   }
+  
+  private Empresa verifyIfExists(Long id) throws EmpresaNotFoundException {
+		return repository.findById(id).orElseThrow(() -> new EmpresaNotFoundException(id));
+	}
 
 }

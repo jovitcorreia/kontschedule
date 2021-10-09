@@ -1,0 +1,1 @@
+insert into contador (id, cpf, crc, nome, sobrenome) values (1,'023.825.928-50', '1234', 'John', 'Doe');

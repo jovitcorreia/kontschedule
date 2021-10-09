@@ -23,13 +23,11 @@ public class EmpresaRepresentation {
     this.razaoSocial = empresa.getRazaoSocial();
     this.nomeFantasia = empresa.getNomeFantasia();
     this.CNPJ = empresa.getCNPJ();
-    this.atividades.addAll(
-        empresa.getAtividades().stream()
-            .map(AtividadeRepresentation::new)
-            .collect(Collectors.toList()));
-    this.enderecos.addAll(
-        empresa.getEnderecos().stream()
-            .map(EnderecoRepresentation::new)
-            .collect(Collectors.toList()));
+	/*
+	 * this.atividades.addAll( empresa.getAtividades().stream()
+	 * .map(AtividadeRepresentation::new) .collect(Collectors.toList()));
+	 * this.enderecos.addAll( empresa.getEnderecos().stream()
+	 * .map(EnderecoRepresentation::new) .collect(Collectors.toList()));
+	 */
   }
 }

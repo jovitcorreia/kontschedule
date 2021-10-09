@@ -1,19 +1,25 @@
 package br.com.kontulari.kontschedule.atividade;
 
-import br.com.kontulari.kontschedule.empresa.Empresa;
-import br.com.kontulari.kontschedule.util.CompetenciaConverter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.Objects;
 
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import br.com.kontulari.kontschedule.empresa.Empresa;
+import br.com.kontulari.kontschedule.util.CompetenciaConverter;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Getter
-@NoArgsConstructor
+@Builder
 @Setter
 public class Atividade {
   @Id
