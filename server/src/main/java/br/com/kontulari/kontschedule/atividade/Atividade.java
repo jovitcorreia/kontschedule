@@ -1,7 +1,7 @@
 package br.com.kontulari.kontschedule.atividade;
 
-import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Convert;
@@ -13,14 +13,18 @@ import javax.persistence.ManyToOne;
 
 import br.com.kontulari.kontschedule.empresa.Empresa;
 import br.com.kontulari.kontschedule.util.CompetenciaConverter;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Builder
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Atividade {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,14 +34,15 @@ public class Atividade {
 
   private String nome;
   private String descricao;
+  private String setor;
 
   @Convert(converter = CompetenciaConverter.class)
   private YearMonth competencia;
 
   private AtividadeStatus status = AtividadeStatus.PENDENTE;
 
-  private LocalDateTime dataExecucao;
-  private LocalDateTime prazoExecucao;
+  private Date dataExecucao;
+  private Date prazoExecucao;
 
   @Override
   public boolean equals(Object object) {
