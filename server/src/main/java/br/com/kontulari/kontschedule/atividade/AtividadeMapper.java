@@ -15,6 +15,21 @@ public class AtividadeMapper {
 				.prazoExecucao(atividadeDto.getPrazoExecucao())
 				.status(atividadeDto.getStatus())
 				.empresa(new Empresa(atividadeDto.getIdEmpresa()))
+				.setor(atividadeDto.getSetor())
+				.build();
+	}
+	
+	public static AtividadeRepresentation fromModel(Atividade atividade) {
+		return AtividadeRepresentation.builder()
+				.id(atividade.getId())
+				.competencia(atividade.getCompetencia())
+				.dataExecucao(atividade.getDataExecucao())
+				.prazoExecucao(atividade.getPrazoExecucao())
+				.descricao(atividade.getDescricao())
+				.setor(atividade.getSetor())
+				.nome(atividade.getNome())
+				.status(atividade.getStatus())
+				.idEmpresa(atividade.getEmpresa().getId())
 				.build();
 	}
 
