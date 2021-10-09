@@ -30,6 +30,12 @@ public class Empresa {
   @OneToMany(mappedBy = "empresa")
   private List<EnderecoEmpresa> enderecos = new ArrayList<>();
 
+  public Empresa(String razaoSocial, String nomeFantasia, String CNPJ) {
+    this.razaoSocial = razaoSocial;
+    this.nomeFantasia = nomeFantasia;
+    this.CNPJ = CNPJ;
+  }
+
   @Override
   public boolean equals(Object object) {
     if (this == object) return true;

@@ -1,5 +1,6 @@
-package br.com.kontulari.kontschedule.contador;
+package br.com.kontulari.kontschedule.contador.dto;
 
+import br.com.kontulari.kontschedule.contador.Contador;
 import lombok.Getter;
 import lombok.Setter;
 

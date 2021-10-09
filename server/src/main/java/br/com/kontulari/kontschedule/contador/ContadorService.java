@@ -1,5 +1,6 @@
 package br.com.kontulari.kontschedule.contador;
 
+import br.com.kontulari.kontschedule.contador.dto.ContadorRegistration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
