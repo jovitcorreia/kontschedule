@@ -16,6 +16,7 @@ public class AtividadeRepresentation {
   private final LocalDateTime dataExecucao;
   private final LocalDateTime prazoExecucao;
   private final AtividadeStatus status;
+  private final Long idEmpresa;
 
   public AtividadeRepresentation(Atividade atividade) {
     this.id = atividade.getId();
@@ -25,5 +26,6 @@ public class AtividadeRepresentation {
     this.dataExecucao = atividade.getDataExecucao();
     this.prazoExecucao = atividade.getPrazoExecucao();
     this.status = atividade.getStatus();
+    this.idEmpresa=atividade.getEmpresa().getId();
   }
 }

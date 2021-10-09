@@ -21,9 +21,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.kontulari.kontschedule.empresa.dto.EmpresaRegistration;
 import br.com.kontulari.kontschedule.empresa.dto.EmpresaRepresentation;
+import br.com.kontulari.kontschedule.exception.EmpresaNotFoundException;
 
 @RestController
-@RequestMapping("./empresa")
+@RequestMapping("/empresa")
 public class EmpresaController {
   @Autowired private EmpresaService service;
 
@@ -45,7 +46,7 @@ public class EmpresaController {
   public ResponseEntity<EmpresaRepresentation> cadastra(
       @RequestBody @Valid EmpresaRegistration registro, UriComponentsBuilder builder) {
     Empresa empresa = service.cadastra(registro);
-    URI uri = builder.path("/contador/{id}").buildAndExpand(empresa.getId()).toUri();
+    URI uri = builder.path("/empresa/{id}").buildAndExpand(empresa.getId()).toUri();
     return ResponseEntity.created(uri).body(new EmpresaRepresentation(empresa));
   }
 
@@ -61,7 +62,7 @@ public class EmpresaController {
   
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteById(@PathVariable Long id) {
+  public void deleteById(@PathVariable Long id) throws EmpresaNotFoundException {
       service.deleta(id);
   } 
 }
