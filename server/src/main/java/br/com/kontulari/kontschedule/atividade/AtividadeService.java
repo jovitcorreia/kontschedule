@@ -1,18 +1,33 @@
 package br.com.kontulari.kontschedule.atividade;
 
+import br.com.kontulari.kontschedule.atividade.dto.AtividadeRegistration;
 import br.com.kontulari.kontschedule.atividade.dto.AtividadeRepresentation;
+import br.com.kontulari.kontschedule.contador.Contador;
+import br.com.kontulari.kontschedule.contador.ContadorRepository;
+import br.com.kontulari.kontschedule.empresa.Empresa;
+import br.com.kontulari.kontschedule.empresa.EmpresaRepository;
 import br.com.kontulari.kontschedule.exception.AtividadeNotFoundException;
-import br.com.kontulari.kontschedule.exception.ContadorNotFoundException;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class AtividadeService {
+  @Autowired private ContadorRepository contadorRepository;
+  @Autowired private EmpresaRepository empresaRepository;
   @Autowired private AtividadeRepository repository;
+
+  public List<AtividadeRepresentation> busca() {
+    List<Atividade> lista = (List<Atividade>) repository.findAll();
+    return lista.stream().map(AtividadeMapper::fromModel).collect(Collectors.toList());
+  }
 
   public AtividadeRepresentation busca(Long id) throws AtividadeNotFoundException {
     Atividade atividade = verifyIfExists(id);
@@ -24,9 +39,21 @@ public class AtividadeService {
     return repository.findById(id).orElseThrow(() -> new AtividadeNotFoundException(id));
   }
 
-  public AtividadeRepresentation cadastra(@Valid AtividadeRepresentation registro)
-      throws ContadorNotFoundException {
-    Atividade atividade = AtividadeMapper.fromDTO(registro);
+  @Transactional
+  public AtividadeRepresentation cadastra(@Valid AtividadeRegistration registro)
+      throws ParseException {
+    Atividade atividade = registro.converte();
+    Optional<Empresa> empresa = empresaRepository.findById(registro.getIdEmpresa());
+    if (empresa.isPresent()) {
+      atividade.setEmpresa(empresa.get());
+      Hibernate.initialize(empresa.get().getAtividades());
+      empresa.get().getAtividades().add(atividade);
+    }
+    Optional<Contador> contador = contadorRepository.findById(registro.getIdContador());
+    if (contador.isPresent()) {
+      atividade.setContador(contador.get());
+      contador.get().getAtividades().add(atividade);
+    }
     repository.save(atividade);
     return AtividadeMapper.fromModel(atividade);
   }

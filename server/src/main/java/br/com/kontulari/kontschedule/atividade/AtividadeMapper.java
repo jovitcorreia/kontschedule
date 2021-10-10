@@ -4,7 +4,9 @@ import br.com.kontulari.kontschedule.atividade.dto.AtividadeRepresentation;
 import br.com.kontulari.kontschedule.contador.ContadorService;
 import br.com.kontulari.kontschedule.empresa.EmpresaService;
 import br.com.kontulari.kontschedule.exception.ContadorNotFoundException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AtividadeMapper {
 
   public static Atividade fromDTO(AtividadeRepresentation atividadeDto)
@@ -34,6 +36,7 @@ public class AtividadeMapper {
         .nome(atividade.getNome())
         .status(atividade.getStatus())
         .idEmpresa(atividade.getEmpresa().getId())
+        .idContador(atividade.getContador().getId())
         .build();
   }
 }

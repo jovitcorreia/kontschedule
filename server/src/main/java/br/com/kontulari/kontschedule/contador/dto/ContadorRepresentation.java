@@ -1,14 +1,18 @@
 package br.com.kontulari.kontschedule.contador.dto;
 
+import br.com.kontulari.kontschedule.atividade.dto.AtividadeRepresentation;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+
+import java.util.List;
 
 @Builder
-@Getter
+@Data
 public class ContadorRepresentation {
   private final Long id;
   private final String nome;
-  private final String CPF;
-  private final String CRC;
+  private final String cpf;
+  private final String crc;
   private final String endereco;
+  private final List<AtividadeRepresentation> atividades;
 }

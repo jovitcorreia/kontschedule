@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
-import java.time.YearMonth;
 import java.util.Date;
 
 @Data
@@ -21,7 +20,7 @@ public class AtividadeRepresentation {
   private final Long idContador;
 
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd")
-  private final YearMonth competencia;
+  private final Date competencia;
 
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private final Date dataExecucao;

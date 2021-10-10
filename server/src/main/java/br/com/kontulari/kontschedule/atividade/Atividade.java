@@ -2,11 +2,9 @@ package br.com.kontulari.kontschedule.atividade;
 
 import br.com.kontulari.kontschedule.contador.Contador;
 import br.com.kontulari.kontschedule.empresa.Empresa;
-import br.com.kontulari.kontschedule.util.CompetenciaConverter;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.YearMonth;
 import java.util.Date;
 import java.util.Objects;
 
@@ -21,15 +19,17 @@ public class Atividade {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne private Empresa empresa;
-  @ManyToOne private Contador contador;
+  @ManyToOne(fetch = FetchType.EAGER)
+  private Contador contador;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  private Empresa empresa;
 
   private String nome;
   private String descricao;
   private String setor;
 
-  @Convert(converter = CompetenciaConverter.class)
-  private YearMonth competencia;
+  private Date competencia;
 
   private AtividadeStatus status = AtividadeStatus.PENDENTE;
 

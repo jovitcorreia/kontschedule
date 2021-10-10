@@ -1,18 +1,18 @@
 package br.com.kontulari.kontschedule.contador.dto;
 
+import br.com.kontulari.kontschedule.atividade.dto.AtividadeRepresentation;
 import lombok.Getter;
-import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
-@Setter
 public class ContadorRegistration {
-  @NotNull @NotEmpty private String nome;
-  @NotNull @NotEmpty private String sobrenome;
-  @NotNull @NotEmpty private String CPF;
-  @NotNull @NotEmpty private String CRC;
+  private final List<AtividadeRepresentation> atividades = new ArrayList<>();
+  private String nome;
+  private String sobrenome;
+  private String cpf;
+  private String crc;
   private Long id;
   private String endereco;
 }
