@@ -70,9 +70,9 @@ public class AtividadeService {
     return atividades.stream().map(AtividadeMapper::fromModel).collect(Collectors.toList());
   }
 
-  public AtividadeRepresentation atualiza(AtividadeUpdate update)
+  public AtividadeRepresentation atualiza(Long id, AtividadeUpdate update)
       throws AtividadeNotFoundException, ParseException {
-    Optional<Atividade> optional = repository.findById(update.getId());
+    Optional<Atividade> optional = repository.findById(id);
     if (optional.isPresent()) {
       Atividade empresa = optional.get();
       SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
