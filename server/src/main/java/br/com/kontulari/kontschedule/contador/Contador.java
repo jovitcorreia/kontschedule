@@ -19,21 +19,21 @@ public class Contador {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "contador")
+  private List<Atividade> atividades = new ArrayList<>();
+
   private String nome;
   private String sobrenome;
-  private String CPF;
-  private String CRC;
+  private String cpf;
+  private String crc;
   private String endereco;
-
-  @OneToMany(mappedBy = "contador")
-  private List<Atividade> atividades = new ArrayList<>();
 
   @Override
   public boolean equals(Object object) {
     if (this == object) return true;
     if (object == null || getClass() != object.getClass()) return false;
     Contador contador = (Contador) object;
-    return id.equals(contador.id) && CPF.equals(contador.CPF) && CRC.equals(contador.CRC);
+    return id.equals(contador.id) && cpf.equals(contador.cpf) && crc.equals(contador.crc);
   }
 
   @Override

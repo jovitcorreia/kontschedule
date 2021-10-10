@@ -37,7 +37,7 @@ public class EmpresaService {
     Empresa atualizacao = EmpresaMapper.fromModel(registro);
     empresa.setRazaoSocial(atualizacao.getRazaoSocial());
     empresa.setNomeFantasia(atualizacao.getNomeFantasia());
-    empresa.setCNPJ(atualizacao.getCNPJ());
+    empresa.setCnpj(atualizacao.getCnpj());
     repository.save(empresa);
     return EmpresaMapper.fromModel(empresa);
   }
@@ -50,5 +50,10 @@ public class EmpresaService {
 
   private void verifyIfExists(Long id) throws EmpresaNotFoundException {
     repository.findById(id).orElseThrow(() -> new EmpresaNotFoundException(id));
+  }
+
+  public Empresa busca(String empresaNome) {
+    Optional<Empresa> optional = repository.findByNomeFantasia(empresaNome);
+    return optional.orElse(null);
   }
 }

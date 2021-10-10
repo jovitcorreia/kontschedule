@@ -1,12 +1,10 @@
 package br.com.kontulari.kontschedule.empresa.dto;
 
 import br.com.kontulari.kontschedule.atividade.dto.AtividadeRepresentation;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -16,9 +14,9 @@ public class EmpresaRepresentation {
   private final Long id;
   private final String razaoSocial;
   private final String nomeFantasia;
-  private final String CNPJ;
+  private final String cnpj;
   private final String endereco;
-  @JsonIgnore private final List<AtividadeRepresentation> atividades = new ArrayList<>();
+  private final List<AtividadeRepresentation> atividades;
 
   //  public EmpresaRepresentation(Empresa empresa) {
   //    this.id = empresa.getId();

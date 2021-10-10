@@ -21,9 +21,9 @@ public class Empresa {
 
   private String razaoSocial;
   private String nomeFantasia;
-  private String CNPJ;
+  private String cnpj;
 
-  @OneToMany(mappedBy = "empresa")
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "empresa")
   private List<Atividade> atividades = new ArrayList<>();
 
   private String endereco;
@@ -33,11 +33,11 @@ public class Empresa {
     if (this == object) return true;
     if (object == null || getClass() != object.getClass()) return false;
     Empresa empresa = (Empresa) object;
-    return id.equals(empresa.id) && CNPJ.equals(empresa.CNPJ);
+    return id.equals(empresa.id) && cnpj.equals(empresa.cnpj);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, CNPJ);
+    return Objects.hash(id, cnpj);
   }
 }
