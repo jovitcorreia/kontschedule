@@ -38,7 +38,7 @@ public class AtividadeController {
   public ResponseEntity<AtividadeRepresentation> atualiza(
       @PathVariable Long id, @RequestBody @Valid AtividadeUpdate registro)
       throws AtividadeNotFoundException, ParseException {
-    AtividadeRepresentation atividade = service.atualiza(registro);
+    AtividadeRepresentation atividade = service.atualiza(id, registro);
     return ResponseEntity.ok(atividade);
   }
 
