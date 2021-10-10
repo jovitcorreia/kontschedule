@@ -1,23 +1,14 @@
 package br.com.kontulari.kontschedule.atividade;
 
+import br.com.kontulari.kontschedule.contador.Contador;
+import br.com.kontulari.kontschedule.empresa.Empresa;
+import br.com.kontulari.kontschedule.util.CompetenciaConverter;
+import lombok.*;
+
+import javax.persistence.*;
 import java.time.YearMonth;
 import java.util.Date;
 import java.util.Objects;
-
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import br.com.kontulari.kontschedule.empresa.Empresa;
-import br.com.kontulari.kontschedule.util.CompetenciaConverter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Getter
@@ -31,6 +22,7 @@ public class Atividade {
   private Long id;
 
   @ManyToOne private Empresa empresa;
+  @ManyToOne private Contador contador;
 
   private String nome;
   private String descricao;

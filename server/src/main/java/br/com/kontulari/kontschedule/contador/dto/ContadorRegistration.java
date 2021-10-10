@@ -1,7 +1,5 @@
 package br.com.kontulari.kontschedule.contador.dto;
 
-import br.com.kontulari.kontschedule.contador.Contador;
-import br.com.kontulari.kontschedule.endereco.EnderecoRepresentation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +14,5 @@ public class ContadorRegistration {
   @NotNull @NotEmpty private String CPF;
   @NotNull @NotEmpty private String CRC;
   private Long id;
-  private EnderecoRepresentation endereco;
-
-  public Contador converte() {
-    return new Contador(id, nome, sobrenome, CPF, CRC);
-  }
+  private String endereco;
 }

@@ -1,10 +1,7 @@
 package br.com.kontulari.kontschedule.empresa;
 
 import br.com.kontulari.kontschedule.atividade.Atividade;
-import br.com.kontulari.kontschedule.endereco.EnderecoEmpresa;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +12,8 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor
 @Setter
+@Builder
+@AllArgsConstructor
 public class Empresa {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +26,7 @@ public class Empresa {
   @OneToMany(mappedBy = "empresa")
   private List<Atividade> atividades = new ArrayList<>();
 
-  @OneToMany(mappedBy = "empresa")
-  private List<EnderecoEmpresa> enderecos = new ArrayList<>();
-
-  public Empresa(String razaoSocial, String nomeFantasia, String CNPJ) {
-    this.razaoSocial = razaoSocial;
-    this.nomeFantasia = nomeFantasia;
-    this.CNPJ = CNPJ;
-  }
+  private String endereco;
 
   @Override
   public boolean equals(Object object) {
@@ -48,8 +40,4 @@ public class Empresa {
   public int hashCode() {
     return Objects.hash(id, CNPJ);
   }
-
-public Empresa(Long idEmpresa) {
-	this.id=idEmpresa;
-}
 }
