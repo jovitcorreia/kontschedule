@@ -1,6 +1,7 @@
 package br.com.kontulari.kontschedule.atividade;
 
 import br.com.kontulari.kontschedule.atividade.dto.AtividadeRepresentation;
+import br.com.kontulari.kontschedule.atividade.dto.AtividadeUpdate;
 import br.com.kontulari.kontschedule.contador.ContadorService;
 import br.com.kontulari.kontschedule.empresa.EmpresaService;
 import br.com.kontulari.kontschedule.exception.ContadorNotFoundException;
@@ -37,6 +38,16 @@ public class AtividadeMapper {
         .status(atividade.getStatus())
         .idEmpresa(atividade.getEmpresa().getId())
         .idContador(atividade.getContador().getId())
+        .build();
+  }
+
+  public static Atividade fromPut(AtividadeUpdate update) {
+    return Atividade.builder()
+        .id(update.getId())
+        .descricao(update.getDescricao())
+        .nome(update.getNome())
+        .status(update.getStatus())
+        .setor(update.getSetor())
         .build();
   }
 }

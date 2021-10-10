@@ -2,6 +2,7 @@ package br.com.kontulari.kontschedule.atividade;
 
 import br.com.kontulari.kontschedule.atividade.dto.AtividadeRegistration;
 import br.com.kontulari.kontschedule.atividade.dto.AtividadeRepresentation;
+import br.com.kontulari.kontschedule.atividade.dto.AtividadeUpdate;
 import br.com.kontulari.kontschedule.contador.Contador;
 import br.com.kontulari.kontschedule.contador.ContadorRepository;
 import br.com.kontulari.kontschedule.empresa.Empresa;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -66,5 +68,22 @@ public class AtividadeService {
   public List<AtividadeRepresentation> buscaPorEmpresa(Long empresaId) {
     List<Atividade> atividades = repository.findByEmpresaId(empresaId);
     return atividades.stream().map(AtividadeMapper::fromModel).collect(Collectors.toList());
+  }
+
+  public AtividadeRepresentation atualiza(AtividadeUpdate update)
+      throws AtividadeNotFoundException, ParseException {
+    Optional<Atividade> optional = repository.findById(update.getId());
+    if (optional.isPresent()) {
+      Atividade empresa = optional.get();
+      SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+      empresa.setPrazoExecucao(formato.parse(update.getPrazoExecucao()));
+      empresa.setDataExecucao(formato.parse(update.getDataExecucao()));
+      empresa.setDescricao(update.getDescricao());
+      empresa.setNome(update.getNome());
+      empresa.setStatus(update.getStatus());
+      return AtividadeMapper.fromModel(empresa);
+    }
+
+    throw new AtividadeNotFoundException(update.getId());
   }
 }

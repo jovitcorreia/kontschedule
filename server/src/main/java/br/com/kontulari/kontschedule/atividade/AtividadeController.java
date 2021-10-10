@@ -2,6 +2,7 @@ package br.com.kontulari.kontschedule.atividade;
 
 import br.com.kontulari.kontschedule.atividade.dto.AtividadeRegistration;
 import br.com.kontulari.kontschedule.atividade.dto.AtividadeRepresentation;
+import br.com.kontulari.kontschedule.atividade.dto.AtividadeUpdate;
 import br.com.kontulari.kontschedule.exception.AtividadeNotFoundException;
 import br.com.kontulari.kontschedule.exception.ContadorNotFoundException;
 import br.com.kontulari.kontschedule.exception.EmpresaNotFoundException;
@@ -30,6 +31,14 @@ public class AtividadeController {
   public ResponseEntity<AtividadeRepresentation> detalha(@PathVariable Long id)
       throws AtividadeNotFoundException {
     AtividadeRepresentation atividade = service.busca(id);
+    return ResponseEntity.ok(atividade);
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<AtividadeRepresentation> atualiza(
+      @PathVariable Long id, @RequestBody @Valid AtividadeUpdate registro)
+      throws AtividadeNotFoundException, ParseException {
+    AtividadeRepresentation atividade = service.atualiza(registro);
     return ResponseEntity.ok(atividade);
   }
 
