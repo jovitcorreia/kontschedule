@@ -86,4 +86,12 @@ public class AtividadeService {
 
     throw new AtividadeNotFoundException(update.getId());
   }
+
+public AtividadeRepresentation atualizaStatus(Long id, String status) throws AtividadeNotFoundException {
+	Atividade atividade=verifyIfExists(id);
+	AtividadeStatus statusAtividade=AtividadeStatus.valueOf(status);
+	atividade.setStatus(statusAtividade);
+	repository.save(atividade);
+	return AtividadeMapper.fromModel(atividade);
+}
 }

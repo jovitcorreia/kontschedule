@@ -41,6 +41,14 @@ public class AtividadeController {
     AtividadeRepresentation atividade = service.atualiza(id, registro);
     return ResponseEntity.ok(atividade);
   }
+  
+  @PutMapping("/{id}/{status}")
+  public ResponseEntity<AtividadeRepresentation> atualizaStatus(
+      @PathVariable Long id, @PathVariable String status)
+      throws AtividadeNotFoundException, ParseException {
+    AtividadeRepresentation atividade = service.atualizaStatus(id, status);
+    return ResponseEntity.ok(atividade);
+  }
 
   @GetMapping("/empresa/{id}")
   public ResponseEntity<List<AtividadeRepresentation>> listaPorEmpresa(@PathVariable Long id) {
