@@ -32,23 +32,16 @@ export default function HomePage() {
   async function adicionarNovaAtividade(atividade) {
     try {
       const hoje = Date.now();
-
-      const novaAtividade = await api.post("/atividade", {
+      await api.post("/atividade", {
         ...formData,
         competencia: format(hoje, "yyyy/MM/dd"),
         prazoExecucao: format(addDays(hoje, 3), "yyyy/MM/dd"),
         idContador: contador.id,
         idEmpresa: 2,
-      });
-
-      setContador({
-        ...contador,
-        atividades: [
-          ...contador.atividades,
-          novaAtividade
-        ]
+      }).then(() => {
+        getContador()
+        setShowModal(false)
       })
-      console.log(novaAtividade)
     } catch {
       alert("Deu erro!");
     }
@@ -78,11 +71,10 @@ export default function HomePage() {
           <Button onClick={() => setShowModal(true)}>Nova Atividade</Button>
           <Tabs defaultActiveKey="list1" className="mb-3">
             <Tab eventKey="list1" title="Atividades">
-              <List atividades={contador.atividades} />
+              <List atividades={contador.atividades} get={getContador} />
             </Tab>
           </Tabs>
         </Container>
-
         <Modal show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Nova atividade</Modal.Title>

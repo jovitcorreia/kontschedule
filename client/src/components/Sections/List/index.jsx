@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
 import Atividade from "../../Atividade";
 
-export default function List({atividades}) {
+export default function List({atividades, get}) {
   return (
     <>
       <Table striped bordered hover>
@@ -19,7 +19,7 @@ export default function List({atividades}) {
         </thead>
         <tbody>
           {atividades && atividades.map(atividade => (
-            <Atividade atividade={atividade} />
+            <Atividade atividade={atividade} get={get} />
           ))}
         </tbody>
       </Table>

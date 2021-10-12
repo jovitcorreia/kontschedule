@@ -2,18 +2,22 @@ import { useState } from "react";
 import { Row, Button, Modal, Col } from "react-bootstrap";
 import api from "../../services";
 
-export default function Atividade({ atividade }) {
+export default function Atividade({ atividade, get }) {
   const [show, setShow] = useState(false);
   async function increase(id) {
     try {
-      await api.put(`atividade/${atividade.id}/${id}`)
+      await api.put(`atividade/${atividade.id}/${id}`).then(() => {
+        get()
+      })
     } catch {
       alert("Deu erro!");
     }
   }
   async function deletar() {
     try {
-      await api.delete(`/atividade/${atividade.id}`);
+      await api.delete(`/atividade/${atividade.id}`).then(() => {
+        get()
+      })
     } catch {
       alert("Deu erro!");
     }
