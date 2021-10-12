@@ -36,6 +36,8 @@ Isso fará com o servidor Tomcat embarcado na aplicação do Spring Boot rode na
 
 Com o backend de pé, será necessário popular o banco de dados H2 com inforamações iniciais. Se tiver o Imnsomnia instalado você poderá importar o arquivo `Insomnia.json` localizado à raiz deste projeto para facilitar este processo.
 
+A recomendação é rodar primeiramente a requisição `Cadastra Contador`, depois as duas requisições de cadastrar empresas e, por fim, as de cadastrar atividades, para garantir que os relacionamentos entre as tabelas ocorra sem problemas.
+
 Por fim, usando outro terminal, no diretório `client` suba o frontend com o comando:
 
 ```bash

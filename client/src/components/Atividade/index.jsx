@@ -4,7 +4,6 @@ import api from "../../services";
 
 export default function Atividade({ atividade }) {
   const [show, setShow] = useState(false);
-
   async function increase(id) {
     try {
       await api.put(`atividade/${atividade.id}/${id}`)
@@ -12,7 +11,6 @@ export default function Atividade({ atividade }) {
       alert("Deu erro!");
     }
   }
-
   async function deletar() {
     try {
       await api.delete(`/atividade/${atividade.id}`);
@@ -20,7 +18,6 @@ export default function Atividade({ atividade }) {
       alert("Deu erro!");
     }
   }
-
   return (
     <>
       <tr>
@@ -48,9 +45,7 @@ export default function Atividade({ atividade }) {
             <b>Descrição:</b>
           </h6>
           <p>{atividade.descricao}</p>
-
           <hr />
-
           <h6>
             <b>Atualizar status para: </b>
           </h6>
