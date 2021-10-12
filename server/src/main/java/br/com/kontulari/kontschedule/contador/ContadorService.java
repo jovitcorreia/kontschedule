@@ -2,6 +2,7 @@ package br.com.kontulari.kontschedule.contador;
 
 import br.com.kontulari.kontschedule.contador.dto.ContadorRegistration;
 import br.com.kontulari.kontschedule.contador.dto.ContadorRepresentation;
+import br.com.kontulari.kontschedule.contador.dto.ContadorUpdate;
 import br.com.kontulari.kontschedule.exception.ContadorNotFoundException;
 import br.com.kontulari.kontschedule.util.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,5 +47,21 @@ public class ContadorService {
     Contador contador = ContadorMapper.fromDTO(registro);
     repository.save(contador);
     return contador;
+  }
+
+  @Transactional
+  public ContadorRepresentation atualiza(Long id, ContadorUpdate update)
+      throws ContadorNotFoundException {
+    Optional<Contador> optional = repository.findById(id);
+    if (optional.isPresent()) {
+      Contador contador = optional.get();
+      contador.setNome(update.getNome());
+      contador.setSobrenome(update.getSobrenome());
+      contador.setEndereco(update.getEndereco());
+      contador.setCpf(update.getCpf());
+      contador.setCrc(update.getCrc());
+      return ContadorMapper.fromModel(contador);
+    }
+    throw new ContadorNotFoundException(update.getId());
   }
 }

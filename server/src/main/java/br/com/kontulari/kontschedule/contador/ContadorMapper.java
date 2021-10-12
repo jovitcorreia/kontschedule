@@ -26,7 +26,6 @@ public class ContadorMapper {
 
   public static Contador fromDTO(ContadorRegistration contador) {
     return Contador.builder()
-        .id(contador.getId())
         .nome(contador.getNome())
         .cpf(contador.getCpf())
         .crc(contador.getCrc())

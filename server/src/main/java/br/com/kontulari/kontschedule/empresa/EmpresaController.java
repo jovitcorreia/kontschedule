@@ -16,13 +16,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/empresa")
 public class EmpresaController {
-  @Autowired private EmpresaService service;
+  @Autowired
+  private EmpresaService service;
 
+  @CrossOrigin(origins = "*")
   @GetMapping
   public List<EmpresaRepresentation> lista() {
     return service.busca();
   }
 
+  @CrossOrigin(origins = "*")
   @GetMapping("/{id}")
   public ResponseEntity<EmpresaRepresentation> detalha(@PathVariable Long id) {
     Empresa empresa = service.busca(id);
@@ -32,17 +35,19 @@ public class EmpresaController {
     return ResponseEntity.notFound().build();
   }
 
+  @CrossOrigin(origins = "*")
   @PostMapping
-  public ResponseEntity<EmpresaRepresentation> cadastra(
-      @RequestBody @Valid EmpresaRegistration registro, UriComponentsBuilder builder) {
+  public ResponseEntity<EmpresaRepresentation> cadastra(@RequestBody @Valid EmpresaRegistration registro,
+      UriComponentsBuilder builder) {
     Empresa empresa = service.cadastra(registro);
     URI uri = builder.path("/empresa/{id}").buildAndExpand(empresa.getId()).toUri();
     return ResponseEntity.created(uri).body(EmpresaMapper.fromModel(empresa));
   }
 
+  @CrossOrigin(origins = "*")
   @PatchMapping("/{id}")
-  public ResponseEntity<EmpresaRepresentation> atualiza(
-      @PathVariable Long id, @RequestBody @Valid EmpresaRegistration registration) {
+  public ResponseEntity<EmpresaRepresentation> atualiza(@PathVariable Long id,
+      @RequestBody @Valid EmpresaRegistration registration) {
     Empresa empresa = service.busca(id);
     if (empresa != null) {
       return ResponseEntity.ok(service.atualiza(empresa, registration));
@@ -50,6 +55,7 @@ public class EmpresaController {
     return ResponseEntity.notFound().build();
   }
 
+  @CrossOrigin(origins = "*")
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteById(@PathVariable Long id) throws EmpresaNotFoundException {

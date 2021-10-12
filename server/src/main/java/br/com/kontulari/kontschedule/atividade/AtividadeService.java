@@ -22,9 +22,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class AtividadeService {
-  @Autowired private ContadorRepository contadorRepository;
-  @Autowired private EmpresaRepository empresaRepository;
-  @Autowired private AtividadeRepository repository;
+  @Autowired
+  private ContadorRepository contadorRepository;
+  @Autowired
+  private EmpresaRepository empresaRepository;
+  @Autowired
+  private AtividadeRepository repository;
 
   public List<AtividadeRepresentation> busca() {
     List<Atividade> lista = (List<Atividade>) repository.findAll();
@@ -42,8 +45,7 @@ public class AtividadeService {
   }
 
   @Transactional
-  public AtividadeRepresentation cadastra(@Valid AtividadeRegistration registro)
-      throws ParseException {
+  public AtividadeRepresentation cadastra(@Valid AtividadeRegistration registro) throws ParseException {
     Atividade atividade = registro.converte();
     Optional<Empresa> empresa = empresaRepository.findById(registro.getIdEmpresa());
     if (empresa.isPresent()) {
@@ -85,5 +87,14 @@ public class AtividadeService {
     }
 
     throw new AtividadeNotFoundException(update.getId());
+  }
+
+  @Transactional
+  public AtividadeRepresentation atualizaStatus(Long id, Integer status) throws AtividadeNotFoundException {
+    Atividade atividade = verifyIfExists(id);
+    AtividadeStatus statusAtividade = AtividadeStatus.values()[status];
+    atividade.setStatus(statusAtividade);
+    // repository.save(atividade);
+    return AtividadeMapper.fromModel(atividade);
   }
 }
